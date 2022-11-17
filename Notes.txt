@@ -1,0 +1,5 @@
+01. Why does App load twice?
+
+02. --legacy-peer-deps -> enzyme-adapter-react-16
+
+03. Axios not waiting for requests.

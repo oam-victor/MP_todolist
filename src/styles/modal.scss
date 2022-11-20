@@ -169,6 +169,11 @@
 
     .modal-content-header{
         width: 70vw;
+        height: 85vh;
+
+        .outer{
+            grid-template-rows: 5vh 70vh 10vh;
+        }
     }
 
     .modal-overlay-header{

@@ -5,6 +5,7 @@ export const Container = styled.div`
     justify-content: center;
     padding: 30px 0;
     height: calc(100% - 80px); //100% of VP - header component
+    z-index: 0;
 
     @media screen and (max-width: 992px) {
         flex-direction: column;

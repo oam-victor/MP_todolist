@@ -5,13 +5,14 @@ import { useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Board } from "./components/boardFolder/Board";
-import { Loading } from "./components/loadFolder/Loading";
 import { Header } from "./components/headerFolder/Header";
+import {Loading} from './components/loadFolder/Loading'
+
 
 function App() {
   const [cards, setCards] = useState([]);
   const [isPending, setIsPending] = useState(true); //variable to identify if the request is pending
-  const [hasDropped, setHasDropped] = useState(''); //variable to identify where the item has dropped
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
 
@@ -24,14 +25,14 @@ function App() {
       .catch((err) => {
         throw new Error(err);
       });
-  }, []);
+  }, [update]);
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <myData.Provider value={{ cards, setCards, hasDropped, setHasDropped}}>
+      <myData.Provider value={{ cards, setCards, setUpdate, update, setIsPending}}>
         <GlobalStyle />
         <Header />
-        {isPending && <Loading />}
+        {isPending && <Loading/>}
         {!isPending && <Board />}
       </myData.Provider>
     </DndProvider>

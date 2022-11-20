@@ -11,6 +11,7 @@ export default createGlobalStyle`
         --listButtonBG: #521069;
         --cardBoxShadow: rgba(192, 208, 230, 0.8);
         --cardBorderTop: rgba(230, 236, 245, 0.4);
+        --modalOverlay: rgba(32, 6, 41, 0.3);
     }
 
     *{

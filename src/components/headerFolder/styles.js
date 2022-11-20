@@ -17,5 +17,13 @@ export const Container = styled.div`
             background: var(--headerLetter);
             border: 0;
             cursor: pointer;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .3s;
+            &:hover{
+                opacity: .8;
+            }
         }
 `;

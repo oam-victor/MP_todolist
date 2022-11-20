@@ -12,8 +12,4 @@ describe('List initial State', ()=>{
         expect(wrapper.exists('.card-title')).toBeTruthy();
     })
 
-    it('should have a description', ()=>{
-        expect(wrapper.exists('.card-description')).toBeTruthy();
-    })
-
 })

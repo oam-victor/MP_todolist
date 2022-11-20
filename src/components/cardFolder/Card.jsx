@@ -1,20 +1,29 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Container, Label } from "./styles";
 import { useDrag } from "react-dnd";
-import { myData } from "../../context/cardsContext";
-import axios from "axios";
+import { BiTrashAlt } from "react-icons/bi";
+import { CardModalDelete } from "./modals/CardModalDelete";
+import { CardModalUpdate } from "./modals/CardModalUpdate";
 
 export const Card = ({ info }) => {
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   let labelColor = "";
 
-  const { cards, setCards, hasDropped } = useContext(myData);
+  const toggleDeleteModal = () => {
+    setIsDeleteOpen(!isDeleteOpen);
+  };
+
+  const toggleUpdateModal = () => {
+    setIsUpdateOpen(!isUpdateOpen);
+  };
 
   switch (info.label) {
     case "urgent":
       labelColor = "red";
       break;
     case "important":
-      labelColor = "yellow";
+      labelColor = "orange";
       break;
     case "later":
       labelColor = "green";
@@ -23,43 +32,40 @@ export const Card = ({ info }) => {
       labelColor = "grey";
   }
 
-  let change = useRef(''); //I cannot access  hasDropped inside of the end property. IDK why. therefore I had to use a reference
-  useEffect(()=>{
-    change.current = hasDropped;
-  },[hasDropped])
-
-  console.log(change.current);
-
   const [{ isDragging }, dragRef] = useDrag(() => ({
     type: "CARD",
+    item: { card: info },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-    end: () => {
-      console.log(hasDropped);
-      axios
-        .put(`api/tasks/` + info.id)
-        .then((res) => {
-          info.status = change.current;
-          let newArray = cards.filter( card => card.id !== info.id);
-          newArray.push(info);
-          setCards(newArray);
-          console.log('cards', cards);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
   }));
 
   return (
     <Container status={info.status} ref={dragRef} isDragging={isDragging}>
       <header>
         <Label color={labelColor} />
-        <p className="card-title">{info.title}</p>
+        <button onClick={toggleUpdateModal}>
+          <p className="card-title">{info.title}</p>
+        </button>
       </header>
       <p className="card-description">{info.description}</p>
-      {info.img && <img src={info.img} alt="profile" />}
+      <div className="footer">
+        <button type="button" onClick={toggleDeleteModal}>
+          <BiTrashAlt size={20} color="var(--headerBG)" />
+        </button>
+        {info.img && <img src={info.img} alt="profile" />}
+      </div>
+      <CardModalDelete
+        info={info}
+        toggleModal={toggleDeleteModal}
+        isOpen={isDeleteOpen}
+      />
+
+      <CardModalUpdate
+        info={info}
+        toggleModal={toggleUpdateModal}
+        isOpen={isUpdateOpen}
+      />
     </Container>
   );
 };

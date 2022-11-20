@@ -3,7 +3,7 @@ To Do's Application
 
 
 ## 📘 Description
-* This project is a to do drag and drop list which allows you to add, delete and update  tasks. The UI was based on a tutorial by [Diego Fernandes](https://www.youtube.com/watch?v=awRtgpRsdTQ&t=3650s). There were several changes along the project, though. I decided to use the Context API, MirageJS, Axios and Styled-Components for didactic purposes.
+* This project is a to do drag and drop list which allows users to add, delete and update  tasks. The UI was based on a tutorial by [Diego Fernandes](https://www.youtube.com/watch?v=awRtgpRsdTQ&t=3650s). There were several changes along the project, though. Context API, MirageJS, Axios, Styled-Components and several other libraries were used.
 
 ## 🖥️ Features
 * The project makes uses of several libraries as:
@@ -14,7 +14,7 @@ To Do's Application
 	* yup
 	* react-modal
 * The project is a CRUD which allows users to drag and drop tasks. However, on mobile, data must be updated through the cards update modal because the drag and drop feature was not implemented for these devices.
-* We fetch data from Mirage and share it through components using the Context API.
+* We fetch data from Mirage using Axios and share it through components using the Context API.
 
 
 ## 🛠️ Technologies
